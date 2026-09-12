@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Voz Matinal</title>
 </head>
+
 <body>
-    <h1>Bom dia!</h1>
-    <p>Aqui vai o leitor de notícias.</p>
+    <audio controls>
+        <source src="{{ url_for('static', filename='audio/vozfinal.mp3') }}" type="audio/mp3">
+    </audio>
+
+    {% for noticia in noticias %}
+        <p>{{ noticia.titulo }}</p>
+    {% endfor %}
 </body>
 </html>
