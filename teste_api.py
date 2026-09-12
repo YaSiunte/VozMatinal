@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+from gtts import gTTS
 
 # carrega as variáveis do .env
 load_dotenv()
@@ -15,7 +16,19 @@ url = f"https://newsapi.org/v2/everything?q=brasil&language=pt&pageSize=5&apiKey
 resposta = requests.get(url)
 
 dados = resposta.json()
+texto_final = "Aqui estão as 5 notícias principais dessa manhã.\n\n"
+lista_noticias = []
 
 for artigo in dados ["articles"]:
     titulo = artigo["title"]
-    print(titulo)
+    descricao = artigo["description"]
+
+    texto_final += f"{titulo}.\n"
+
+    # guarda a notícia completa numa lista de dicionários, pro front-end usar depois
+    lista_noticias.append({"titulo": titulo, "descricao": descricao})
+
+print(texto_final)
+
+audio = gTTS(text=texto_final, lang="pt", tld="com.br")
+audio.save("vozfinal.mp3")
