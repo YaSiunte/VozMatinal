@@ -12,6 +12,13 @@
 
     {% for noticia in noticias %}
         <p>{{ noticia.titulo }}</p>
+
+        <details>
+            <summary>Leia mais</summary>
+            <p>{{ noticia.titulo }}</p>
+        </details>
     {% endfor %}
+
+    
 </body>
 </html>
